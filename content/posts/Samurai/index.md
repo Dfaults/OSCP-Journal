@@ -1,7 +1,7 @@
 ---
 title: HackSmarter Samurai
 author: Daults
-date: 
+date: 2026-10-23T20:00:00-04:00
 ---
 
 {{< lead >}}
