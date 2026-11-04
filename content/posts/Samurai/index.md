@@ -1,6 +1,6 @@
 ---
 title: HackSmarter Samurai
-author: Daults
+author: Dfaults
 date: 2026-10-23T20:00:00-04:00
 ---
 
